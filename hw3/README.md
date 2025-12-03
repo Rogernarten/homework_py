@@ -21,6 +21,17 @@ You can use the internet, including AI engines, but you must use them similar to
 
 For convenience, you can update this README.md file with your citations.
 
+## AI Usage & Citations
+
+I consulted ChatGPT (OpenAI GPT-5.1, December 2025 version) for help on the following high-level concepts:
+
+1. Understanding how to override __setitem__, __getitem__, and __delitem__ in a subclass of dict. 
+2. Clarifying how decorators such as @functools.total_ordering work conceptually.
+3. Asking how to improve error messages for the InvalidTimeError.
+
+I did not request or receive any complete solutions for the homework problems.
+All implementation logic, class structure, and debugging were done by myself.
+
 ## Assignment Objectives
 
 This assignment will give you practice writing classes in Python, designing an OOP class hierarchy, and using dunder methods to overload operators.
