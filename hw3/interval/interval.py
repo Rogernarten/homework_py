@@ -69,10 +69,13 @@ def tight_type(func):
 
 class InvalidTimeError(ValueError):
     """
-    Exception raised when an invalid time value or unsupported operation
-    involving time intervals is encountered.
+    Raised when a time interval is constructed or operated on with invalid
+    values or incompatible operand types.
+    Includes negative durations, malformed time strings, or misuse of
+    arithmetic operations with Interval.
     """
-    pass
+    def __init__(self, message="Invalid time value or operation."):
+        super().__init__(message)
 
 
 def is_valid_time(*args):
@@ -114,7 +117,7 @@ class Interval:
           Raises InvalidTimeError if the resulting time is negative or invalid.
         """
         if not is_valid_time(seconds, minutes, hours):
-            raise InvalidTimeError
+            raise InvalidTimeError("Time Interval length can't be negative!")
 
         self.t = seconds + minutes*60 + hours*3600
 
@@ -136,10 +139,16 @@ class Interval:
           resulting time is invalid.
         """
         if not all(x.isdigit() for x in string.split(":")):
-            raise InvalidTimeError
+            raise InvalidTimeError(
+                "Invalid format. Expected a time string in the form 'HH:MM:SS' "
+                "containing only numeric components."
+            )
 
         if not is_valid_time(*map(int, string.split(":"))):
-            raise InvalidTimeError
+            raise InvalidTimeError(
+                "Invalid time value. The time components must be non-negative and "
+                "the string must contain exactly three components."
+            )
 
         h, m, s = map(int, string.split(":"))
         return cls(seconds=s, minutes=m, hours=h)
