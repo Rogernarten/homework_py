@@ -70,7 +70,15 @@ class Interval:
         return Interval(self.t + other)
 
     @tight_type
+    def __radd__(self, other):
+        return Interval(self.t + other)
+
+    @tight_type
     def __sub__(self, other):
+        return Interval(self.t - other)
+
+    @tight_type
+    def __rsub__(self, other):
         return Interval(self.t - other)
 
     @loose_type
